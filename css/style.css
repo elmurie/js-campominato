@@ -115,17 +115,21 @@ button:active {
     justify-content: center;
     align-items: center;
     font-weight: 900;
-    transition: 1s;
 }
 
 .quadrato:hover {
     color: white;
 }
 
-.quadrato.clicked {
+.quadrato.bomb {
     background: red;
     background-blend-mode: multiply;
     color: white;
 }
 
+.quadrato.safe {
+    background: green;
+    background-blend-mode: multiply;
+    color: white;
+}
 

@@ -36,8 +36,8 @@ function generateBombs(gridSize) {
 
 // Individuo il campo nella pagina
 var field = document.getElementById('campo');
-var howManyCells = 0;
 
+var howManyCells = 0;
 
 var numCells = [];
 
@@ -48,16 +48,6 @@ function createField(num) {
             field.classList.add('field-5');
             for ( var i = 1; i <= num; i++) {
                 field.innerHTML += `<div class="quadrato">${i}</div>`;
-                numCells.push(i);
-            }
-            console.log("l'indice delle celle è: ", numCells);
-            console.log(bombs);
-            for ( var i = 0; i <= numCells.length; i++) {
-                for ( var j = 0; j <= bombs.length; j++) {
-                    if ( numCells[i] === bombs[j] ) {
-                        console.log('bomba trovata alla cella', numCells[i]);
-                    }
-                }
             }
         break;
     }
@@ -95,8 +85,13 @@ function() {
 document.getElementById('campo').addEventListener("click",
     function(square) {
         // 3a. Individua il quadrato tramite target ed aggiungi la classe che ne cambia il colore
-        square.target.classList.add('clicked');
-        // 3b. mostra numero della cella tramite alert  
-        alert(square.target.innerHTML);
+        var bombCheck = parseInt(square.target.innerHTML);
+        console.log(bombCheck);
+        if ( bombs.includes(bombCheck) ) {
+            square.target.classList.add('bomb');
+        } else {
+            square.target.classList.add('safe');
+
+        }
     }
 );
