@@ -27,7 +27,7 @@ function generateBombs(gridSize) {
             bombs.push(singleBomb);
         }
     }
-    console.log('le bombe sono', bombs);
+    console.log('le bombe sono', bombs.sort((a,b)=>a-b));
     return bombs;
 }
 // Individuo il campo nella pagina
@@ -130,8 +130,11 @@ document.getElementById('campo').addEventListener("click",
             points++;
             alreadyClicked.push(bombCheck);
             console.log( "sei a ", points, "punti");
+        } else if ( !(bombs.includes(bombCheck) ) && (alreadyClicked.includes(bombCheck) ) ){
+
         } else {
             square.target.classList.add('bomb');
+            victory.style.display = "none";
             loss.style.display = "block";
             btnAgain.style.display = "inline-block";
             scoreboard.innerHTML = points + (" Punti");
@@ -144,7 +147,7 @@ document.getElementById('campo').addEventListener("click",
     if ( points == safeCells) {
         field.style.pointerEvents = "none";
         victory.style.display = "block";
-        btnAgain.style.display = "block";
+        btnAgain.style.display = "inline-block";
         scoreboard.innerHTML = points + (" Punti");
         result.style.display = "block";
         alreadyClicked = [];
