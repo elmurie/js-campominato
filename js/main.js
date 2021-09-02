@@ -17,43 +17,31 @@ function randomNumber(min, max) {
     return Math.floor( Math.random() * (max - min + 1) ) + min;
 }
 
-// Il computer deve generare 16 numeri casuali tra 1 e 100 (bombe).
+// Il computer deve generare 16 numeri casuali tra 1 ed il numero massimo di celle.
 
 
+var bombs = [];
 function generateBombs(gridSize) {
-    var bombs = [];
     while ( bombs.length < 16 ) {
         var singleBomb = randomNumber(1, gridSize);
         if ( !bombs.includes(singleBomb)) {
             bombs.push(singleBomb);
         }
-
     }
     bombs = bombs.sort(function(a, b){return a-b});; 
     console.log('le bombe sono', bombs);
+    return bombs;
 }
-
-// while ( bombs.length < 16 ) {
-//     var singleBomb = randomNumber(1, 20);
-//     if ( !bombs.includes(singleBomb)) {
-//         bombs.push(singleBomb);
-//     }
-// }
-// bombs = bombs.sort(); 
-// console.log('le bombe sono', bombs);
 
 
 // Individuo il campo nella pagina
 var field = document.getElementById('campo');
+var howManyCells = 0;
 
-// Da quante celle è composto il campo
-var howManyCells = parseInt(document.getElementById('grid').value); 
 
 var numCells = [];
 
 function createField(num) {
-    // Da quante celle è composto il campo
-    var howManyCells = parseInt(document.getElementById('grid').value); 
     switch(num) {
         // 2b. Assegno ad ogni caso una larghezza diversa del e genero il corretto numero di celle
         case 20:
@@ -63,29 +51,15 @@ function createField(num) {
                 numCells.push(i);
             }
             console.log("l'indice delle celle è: ", numCells);
-            bombs = generateBombs(howManyCells);
-            var bombFound = false;
-            for ( var i = 0; i <= numCells.length ; i++) {
-                for (var j = 0; j <= bombs.length ; j++) {
-                    if ( numCells[i] === bombs[j]) {
-                        bombFound = true;
-                        console.log('bomb found at ', numCells[i]);
+            console.log(bombs);
+            for ( var i = 0; i <= numCells.length; i++) {
+                for ( var j = 0; j <= bombs.length; j++) {
+                    if ( numCells[i] === bombs[j] ) {
+                        console.log('bomba trovata alla cella', numCells[i]);
                     }
                 }
             }
         break;
-        case 80:
-            for ( var i = 1; i <= num; i++) {
-            field.innerHTML += `<div class="quadrato">${i}</div>`;
-        }
-        break;
-        case 50:
-            for ( var i = 1; i <= num; i++) {
-            field.innerHTML += `<div class="quadrato">${i}</div>`;
-        }
-        break;
-
-
     }
 
 }
@@ -100,8 +74,8 @@ btnGenerate.addEventListener('click',
 function() {
     field.innerHTML = '';
     howManyCells = parseInt(document.getElementById('grid').value); 
+    bombs = generateBombs(howManyCells);
     createField(howManyCells);
-    
 }
 ); 
 // Individuo il bottone per cancellare il campo
@@ -111,7 +85,6 @@ btnReset.addEventListener('click',
 function() {
     document.getElementById("grid").value = '';
     field.innerHTML = '';
-    
 }
 ); 
 
