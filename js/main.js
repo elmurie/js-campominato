@@ -17,45 +17,57 @@ function randomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1) ) + min;
 }
 
+// Il computer deve generare 16 numeri casuali tra 1 e 100 (bombe).
+
+var bombs = [];
+
+while ( bombs.length < 16 ) {
+    var singleBomb = randomNumber(1, 20);
+    if ( !bombs.includes(singleBomb)) {
+        bombs.push(singleBomb);
+    }
+}
+bombs = bombs.sort(); 
+console.log('le bombe sono', bombs);
+
+
 // Individuo il campo nella pagina
 var field = document.getElementById('campo');
 
 // Da quante celle è composto il campo
 let howManyCells = parseInt(document.getElementById('grid').value); 
 
-// Indice delle celle
 var numCells = [];
 
 function createField(num) {
     switch(num) {
         // 2b. Assegno ad ogni caso una larghezza diversa del e genero il corretto numero di celle
-        case 10:
+        case 20:
             field.classList.add('field-5');
             for ( var i = 1; i <= num; i++) {
-            field.innerHTML += `<div class="quadrato">${i}</div>`;
-            numCells.push(i);
-            var bombFound = false;
-            if ( numCells[i] == bombs[i]) {
-                bombFound = true;
-                console.log('bomb found at', i);
+                field.innerHTML += `<div class="quadrato">${i}</div>`;
+                numCells.push(i);
             }
-        }
-        console.log('le celle sono', numCells);
-        
+            console.log(numCells);
+            var bombFound = false;
+            for ( var i = 0; i <= numCells.length ; i++) {
+                for (var j = 0; j <= bombs.length ; j++) {
+                    if ( numCells[i] === bombs[j]) {
+                        bombFound = true;
+                        console.log('bomb found at ', numCells[i]);
+                    }
+                }
+            }
         break;
         case 80:
             for ( var i = 1; i <= num; i++) {
             field.innerHTML += `<div class="quadrato">${i}</div>`;
-            numCells.push(i);
         }
-        console.log(numCells);
         break;
         case 50:
             for ( var i = 1; i <= num; i++) {
             field.innerHTML += `<div class="quadrato">${i}</div>`;
-            numCells.push(i);
         }
-        console.log(numCells);
         break;
 
 
@@ -87,19 +99,6 @@ function() {
     
 }
 ); 
-
-// Il computer deve generare 16 numeri casuali tra 1 e 100 (bombe).
-
-var bombs = [];
-
-while ( bombs.length < 3 ) {
-    var singleBomb = randomNumber(1, 10);
-    if ( !bombs.includes(singleBomb)) {
-        bombs.push(singleBomb);
-    }
-}
-bombs = bombs.sort(); 
-console.log('le bombe sono', bombs);
 
 
 
