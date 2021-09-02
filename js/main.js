@@ -14,32 +14,46 @@ con difficoltà 2 => tra 1 e 50 */
 
 // Genera numero random da 1 a 100 
 function randomNumber(min, max) {
-    return Math.floor(Math.random() * (max - min + 1) ) + min;
+    return Math.floor( Math.random() * (max - min + 1) ) + min;
 }
 
 // Il computer deve generare 16 numeri casuali tra 1 e 100 (bombe).
 
-var bombs = [];
 
-while ( bombs.length < 16 ) {
-    var singleBomb = randomNumber(1, 20);
-    if ( !bombs.includes(singleBomb)) {
-        bombs.push(singleBomb);
+function generateBombs(gridSize) {
+    var bombs = [];
+    while ( bombs.length < 16 ) {
+        var singleBomb = randomNumber(1, gridSize);
+        if ( !bombs.includes(singleBomb)) {
+            bombs.push(singleBomb);
+        }
+
     }
+    bombs = bombs.sort(function(a, b){return a-b});; 
+    console.log('le bombe sono', bombs);
 }
-bombs = bombs.sort(); 
-console.log('le bombe sono', bombs);
+
+// while ( bombs.length < 16 ) {
+//     var singleBomb = randomNumber(1, 20);
+//     if ( !bombs.includes(singleBomb)) {
+//         bombs.push(singleBomb);
+//     }
+// }
+// bombs = bombs.sort(); 
+// console.log('le bombe sono', bombs);
 
 
 // Individuo il campo nella pagina
 var field = document.getElementById('campo');
 
 // Da quante celle è composto il campo
-let howManyCells = parseInt(document.getElementById('grid').value); 
+var howManyCells = parseInt(document.getElementById('grid').value); 
 
 var numCells = [];
 
 function createField(num) {
+    // Da quante celle è composto il campo
+    var howManyCells = parseInt(document.getElementById('grid').value); 
     switch(num) {
         // 2b. Assegno ad ogni caso una larghezza diversa del e genero il corretto numero di celle
         case 20:
@@ -48,7 +62,8 @@ function createField(num) {
                 field.innerHTML += `<div class="quadrato">${i}</div>`;
                 numCells.push(i);
             }
-            console.log(numCells);
+            console.log("l'indice delle celle è: ", numCells);
+            bombs = generateBombs(howManyCells);
             var bombFound = false;
             for ( var i = 0; i <= numCells.length ; i++) {
                 for (var j = 0; j <= bombs.length ; j++) {
