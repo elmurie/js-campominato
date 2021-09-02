@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- google font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+        <!-- /google font -->
+        <!-- css -->
+        <link rel="stylesheet" href="css/style.css">
+        <!-- /css -->
+        <title>Campo Minato</title>
+    </head>
+
+    <body>
+        <h1>CAMPO MINATO</h1>
+        <div class="user-choice">
+            <select name="grid" id="grid">
+                <option value="" selected disabled hidden>Seleziona la difficoltà</option>
+                <option value="easy">FACILE - 100 CELLE</option>
+                <option value="medium">MEDIO - 80 CELLE</option>
+                <option value="hard">DIFFICILE - 50 CELLE</option>
+            </select>
+            <button id="generate">START</button>
+        </div>
+        <button id="reset">RESET</button>
+        <div id="campo">
+        </div>
+
+        <script src="js/main.js"></script>
+    </body>
+
+</html>
