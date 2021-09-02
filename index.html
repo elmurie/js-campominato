@@ -18,7 +18,7 @@
 
     <body>
         <h1>CAMPO MINATO</h1>
-        <div class="user-choice">
+        <div class="user-choice" id="userChoice">
             <select name="grid" id="grid">
                 <option value="" selected disabled hidden>Seleziona la difficoltà</option>
                 <option value="20">TEST - 20 CELLE</option>
@@ -28,7 +28,15 @@
             <button id="generate">START</button>
         </div>
         <button id="reset">RESET</button>
-        <div id="campo">
+        <div class="frame">
+            <div id="result">
+                <h1 id="victory">Hai vinto</h1>
+                <h1 id="loss">Hai perso</h1>
+                <h2 id="scoreboard"></h2>
+                <button id="playAgain">Rigioca!</button>
+            </div>
+            <div id="campo">
+        </div>
         </div>
 
         <script src="js/main.js"></script>

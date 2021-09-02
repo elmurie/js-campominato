@@ -8,7 +8,7 @@
 body {
     font-family: 'Roboto', sans-serif;  
     color: black;
-
+    position: relative;
 }
 
 h1 {
@@ -53,12 +53,25 @@ button:active {
 
 }
 
+.frame {
+    position: relative;
+}
+
 #reset {
     display: block;
     margin: 0 auto;
     background-color: rgb(0, 0, 0);
     color: white;
     margin-bottom: 20px;
+}
+
+#result {
+    background-color: red;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
 }
 
 #reset:hover {

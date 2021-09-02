@@ -46,24 +46,46 @@ function createField(num) {
                 field.innerHTML += `<div class="quadrato" id="${i}"></div>`;
             }
         break;
+        case 80:
+            field.classList.add('field-5');
+            for ( var i = 1; i <= num; i++) {
+                field.innerHTML += `<div class="quadrato" id="${i}"></div>`;
+            }
+        break;
+        case 50:
+            field.classList.add('field-5');
+            for ( var i = 1; i <= num; i++) {
+                field.innerHTML += `<div class="quadrato" id="${i}"></div>`;
+            }
+        break;
     }
 
 }
 //-----------------------//
 
 /* PROGRAMMA */
+var result = document.getElementById('result');
+result.style.display = "none";
+var victory = document.getElementById('victory');
+var loss = document.getElementById('loss');
+var scoreboard = document.getElementById('scoreboard');
+
+
+var userChoice = document.getElementById("userChoice");
 
 // Individuo il bottone per generare il campo
 var btnGenerate = document.getElementById("generate");
+
+var safeCells = 0;
 // assegno la funzione al bottone
 btnGenerate.addEventListener('click',
 function() {
-    // var userChoice = document.getElementsByClassName('user-choice');
-    // userChoice.style.visibility = 'hidden';
+    userChoice.style.display = "none";
     field.innerHTML = '';
     howManyCells = parseInt(document.getElementById('grid').value); 
     bombs = generateBombs(howManyCells);
     createField(howManyCells);
+    return safeCells = howManyCells - +bombs.length;
 }
 ); 
 // Individuo il bottone per cancellare il campo
@@ -73,12 +95,25 @@ btnReset.addEventListener('click',
 function() {
     document.getElementById("grid").value = '';
     field.innerHTML = '';
+    userChoice.style.display = "block";
+    btnAgain.style.display = "none";
     bombs = [];
 }
 ); 
 
-// Field click
+// Individuo il bottone per rigiocare
+var btnAgain = document.getElementById('playAgain');
+// assegno la funzione al bottone
+btnAgain.addEventListener('click',
+    function() {
+        bombs = [];
+        field.innerHTML = "";
+        result.style.display = "none";
+        userChoice.style.display = "block";
+    }
+);
 
+// Field click
 var points = 0;
 var alreadyClicked = [];
 document.getElementById('campo').addEventListener("click",
@@ -89,11 +124,15 @@ document.getElementById('campo').addEventListener("click",
             points++;
             alreadyClicked.push(bombCheck);
             console.log( "sei a ", points, "punti");
-
         } else {
             square.target.classList.add('bomb');
-
-
-        }
+            scoreboard.innerHTML = points + (" Punti");
+            result.style.display = "block";
     }
+    if ( points == safeCells) {
+        scoreboard.innerHTML = points + (" Punti");
+        result.style.display = "block";
+    }
+}
 );
+
