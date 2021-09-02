@@ -12,28 +12,24 @@ con difficoltà 2 => tra 1 e 50 */
 
 /* FUNZIONI */
 
-// Genera numero random da 1 a 100 
+// Genera numero random
 function randomNumber(min, max) {
     return Math.floor( Math.random() * (max - min + 1) ) + min;
 }
 
-// Il computer deve generare 16 numeri casuali tra 1 ed il numero massimo di celle.
-
+// Genera 16 "bombe" con assegnato un numero random compreso tra 1 ed il numero di celle
 
 var bombs = [];
 function generateBombs(gridSize) {
-    while ( bombs.length < 16 ) {
+    while ( bombs.length < 3 ) {
         var singleBomb = randomNumber(1, gridSize);
         if ( !bombs.includes(singleBomb)) {
             bombs.push(singleBomb);
         }
     }
-    bombs = bombs.sort(function(a, b){return a-b});; 
     console.log('le bombe sono', bombs);
     return bombs;
 }
-
-
 // Individuo il campo nella pagina
 var field = document.getElementById('campo');
 
@@ -47,7 +43,7 @@ function createField(num) {
         case 20:
             field.classList.add('field-5');
             for ( var i = 1; i <= num; i++) {
-                field.innerHTML += `<div class="quadrato">${i}</div>`;
+                field.innerHTML += `<div class="quadrato" id="${i}"></div>`;
             }
         break;
     }
@@ -62,6 +58,8 @@ var btnGenerate = document.getElementById("generate");
 // assegno la funzione al bottone
 btnGenerate.addEventListener('click',
 function() {
+    // var userChoice = document.getElementsByClassName('user-choice');
+    // userChoice.style.visibility = 'hidden';
     field.innerHTML = '';
     howManyCells = parseInt(document.getElementById('grid').value); 
     bombs = generateBombs(howManyCells);
@@ -75,22 +73,26 @@ btnReset.addEventListener('click',
 function() {
     document.getElementById("grid").value = '';
     field.innerHTML = '';
+    bombs = [];
 }
 ); 
 
+// Field click
 
-
-// Al click su una cella dovrà essere mostrato con un alert il numero della cella e il suo background diventerà rosso.
-
+var points = 0;
+var alreadyClicked = [];
 document.getElementById('campo').addEventListener("click",
     function(square) {
-        // 3a. Individua il quadrato tramite target ed aggiungi la classe che ne cambia il colore
-        var bombCheck = parseInt(square.target.innerHTML);
-        console.log(bombCheck);
-        if ( bombs.includes(bombCheck) ) {
-            square.target.classList.add('bomb');
-        } else {
+        var bombCheck = parseInt(square.target.id);
+        if ( !(bombs.includes(bombCheck) ) && !(alreadyClicked.includes(bombCheck) ) ) {
             square.target.classList.add('safe');
+            points++;
+            alreadyClicked.push(bombCheck);
+            console.log( "sei a ", points, "punti");
+
+        } else {
+            square.target.classList.add('bomb');
+
 
         }
     }
