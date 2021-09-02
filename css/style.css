@@ -72,6 +72,7 @@ button:active {
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 3;
+    text-align: center;
 }
 
 #reset:hover {
@@ -91,37 +92,14 @@ button:active {
 
 /* Field width*/
 
-.field-2 {
-    width: 200px;
-}
-.field-3 {
-    width: 300px;
-}
-.field-4 {
-    width: 400px;
-}
-.field-5 {
+
+.field-500 {
     width: 500px;
-}
-.field-6 {
-    width: 600px;
-}
-.field-7 {
-    width: 700px;
-}
-.field-8 {
-    width: 800px;
-}
-.field-9 {
-    width: 900px;
-}
-.field-10 {
-    width: 1000px;
 }
 
 .quadrato {
-    height: 100px;
-    width: 100px;
+    width: 50px;
+    height: 50px;
     border: 1px solid black;
     background-color: rgb(160, 160, 160);
     display: flex;

@@ -21,7 +21,7 @@ function randomNumber(min, max) {
 
 var bombs = [];
 function generateBombs(gridSize) {
-    while ( bombs.length < 3 ) {
+    while ( bombs.length < 16 ) {
         var singleBomb = randomNumber(1, gridSize);
         if ( !bombs.includes(singleBomb)) {
             bombs.push(singleBomb);
@@ -40,22 +40,22 @@ var numCells = [];
 function createField(num) {
     switch(num) {
         // 2b. Assegno ad ogni caso una larghezza diversa del e genero il corretto numero di celle
-        case 20:
-            field.classList.add('field-5');
+        case 100:
+            field.classList.add('field-500');
             for ( var i = 1; i <= num; i++) {
-                field.innerHTML += `<div class="quadrato" id="${i}"></div>`;
+                field.innerHTML += `<div class="quadrato big" id="${i}"></div>`;
             }
         break;
         case 80:
-            field.classList.add('field-5');
+            field.classList.add('field-500');
             for ( var i = 1; i <= num; i++) {
-                field.innerHTML += `<div class="quadrato" id="${i}"></div>`;
+                field.innerHTML += `<div class="quadrato big" id="${i}"></div>`;
             }
         break;
         case 50:
-            field.classList.add('field-5');
+            field.classList.add('field-500');
             for ( var i = 1; i <= num; i++) {
-                field.innerHTML += `<div class="quadrato" id="${i}"></div>`;
+                field.innerHTML += `<div class="quadrato small" id="${i}"></div>`;
             }
         break;
     }
@@ -67,7 +67,10 @@ function createField(num) {
 var result = document.getElementById('result');
 result.style.display = "none";
 var victory = document.getElementById('victory');
+victory.style.display = "none";
 var loss = document.getElementById('loss');
+loss.style.display = "none";
+
 var scoreboard = document.getElementById('scoreboard');
 
 
@@ -93,11 +96,13 @@ var btnReset = document.getElementById("reset");
 // assegno la funzione al bottone
 btnReset.addEventListener('click',
 function() {
+    result.style.display = "none";
     document.getElementById("grid").value = '';
     field.innerHTML = '';
     userChoice.style.display = "block";
     btnAgain.style.display = "none";
     bombs = [];
+    field.style.pointerEvents = "auto";
 }
 ); 
 
@@ -110,6 +115,7 @@ btnAgain.addEventListener('click',
         field.innerHTML = "";
         result.style.display = "none";
         userChoice.style.display = "block";
+        field.style.pointerEvents = "auto";
     }
 );
 
@@ -126,12 +132,24 @@ document.getElementById('campo').addEventListener("click",
             console.log( "sei a ", points, "punti");
         } else {
             square.target.classList.add('bomb');
+            loss.style.display = "block";
+            btnAgain.style.display = "inline-block";
             scoreboard.innerHTML = points + (" Punti");
             result.style.display = "block";
+            bombs = [];
+            points = 0;
+            alreadyClicked = [];
+            field.style.pointerEvents = "none";
     }
     if ( points == safeCells) {
+        field.style.pointerEvents = "none";
+        victory.style.display = "block";
+        btnAgain.style.display = "block";
         scoreboard.innerHTML = points + (" Punti");
         result.style.display = "block";
+        alreadyClicked = [];
+        bombs = [];
+        points = 0;
     }
 }
 );
