@@ -31,21 +31,27 @@ function createField(num) {
         // 2b. Assegno ad ogni caso una larghezza diversa del e genero il corretto numero di celle
         case 10:
             field.classList.add('field-5');
-            for ( var i = 1; i <= (num); i++) {
+            for ( var i = 1; i <= num; i++) {
             field.innerHTML += `<div class="quadrato">${i}</div>`;
             numCells.push(i);
+            var bombFound = false;
+            if ( numCells[i] == bombs[i]) {
+                bombFound = true;
+                console.log('bomb found at', i);
+            }
         }
-        console.log(numCells);
+        console.log('le celle sono', numCells);
+        
         break;
         case 80:
-            for ( var i = 1; i <= (num); i++) {
+            for ( var i = 1; i <= num; i++) {
             field.innerHTML += `<div class="quadrato">${i}</div>`;
             numCells.push(i);
         }
         console.log(numCells);
         break;
         case 50:
-            for ( var i = 1; i <= (num); i++) {
+            for ( var i = 1; i <= num; i++) {
             field.innerHTML += `<div class="quadrato">${i}</div>`;
             numCells.push(i);
         }
@@ -87,19 +93,22 @@ function() {
 var bombs = [];
 
 while ( bombs.length < 3 ) {
-    var singleBomb = randomNumber(1, 100);
+    var singleBomb = randomNumber(1, 10);
     if ( !bombs.includes(singleBomb)) {
         bombs.push(singleBomb);
     }
-} 
-console.log(bombs);
+}
+bombs = bombs.sort(); 
+console.log('le bombe sono', bombs);
+
+
 
 // Al click su una cella dovrà essere mostrato con un alert il numero della cella e il suo background diventerà rosso.
 
 document.getElementById('campo').addEventListener("click",
     function(square) {
         // 3a. Individua il quadrato tramite target ed aggiungi la classe che ne cambia il colore
-        square.target.classList.toggle('clicked');
+        square.target.classList.add('clicked');
         // 3b. mostra numero della cella tramite alert  
         alert(square.target.innerHTML);
     }
