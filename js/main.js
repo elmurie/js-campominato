@@ -25,19 +25,19 @@ function createField(num) {
         case 100:
             field.classList.add('field-500');
             for ( var i = 1; i <= num; i++) {
-                field.innerHTML += `<div class="quadrato big" id="${i}"></div>`;
+                field.innerHTML += `<div class="quadrato" id="${i}"></div>`;
             }
         break;
         case 80:
             field.classList.add('field-500');
             for ( var i = 1; i <= num; i++) {
-                field.innerHTML += `<div class="quadrato big" id="${i}"></div>`;
+                field.innerHTML += `<div class="quadrato" id="${i}"></div>`;
             }
         break;
         case 50:
             field.classList.add('field-500');
             for ( var i = 1; i <= num; i++) {
-                field.innerHTML += `<div class="quadrato small" id="${i}"></div>`;
+                field.innerHTML += `<div class="quadrato" id="${i}"></div>`;
             }
         break;
     }
@@ -163,7 +163,7 @@ document.getElementById('campo').addEventListener("click",
         // Se la cella non è una bomba ed è stata già cliccata nessun punto viene assegnato    
         } else if ( !(bombs.includes(bombCheck) ) && (alreadyClicked.includes(bombCheck) ) ){
 
-          // Se la cella ha una bomba viene assegnata una classe che ne cambia il colore e mostra la bomba  
+          // Se la cella ha una bomba viene assegnata una classe che ne cambia il colore ed una che mostra la bomba  
         } else {
             square.target.classList.add('bomb','exploded');
             // Mostro le bombe inesplose nelle celle non cliccate
