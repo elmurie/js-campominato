@@ -35,7 +35,6 @@ var field = document.getElementById('campo');
 
 var howManyCells = 0;
 
-var numCells = [];
 
 function createField(num) {
     switch(num) {
@@ -70,6 +69,9 @@ var victory = document.getElementById('victory');
 victory.style.display = "none";
 var loss = document.getElementById('loss');
 loss.style.display = "none";
+var error = document.getElementById('error');
+error.style.display = "none";
+
 
 var scoreboard = document.getElementById('scoreboard');
 
@@ -83,14 +85,23 @@ var safeCells = 0;
 // assegno la funzione al bottone
 btnGenerate.addEventListener('click',
 function() {
-    victory.style.display = "none";
-    loss.style.display = "none";
-    userChoice.style.display = "none";
-    field.innerHTML = '';
-    howManyCells = parseInt(document.getElementById('grid').value); 
-    bombs = generateBombs(howManyCells);
-    createField(howManyCells);
-    return safeCells = howManyCells - +bombs.length;
+    error.style.display = "none";
+    howManyCells = parseInt(document.getElementById('grid').value);
+    if ( isNaN(howManyCells) ) {
+        error.style.display = "block";
+
+    } else {
+        btnReset.style.display = "block";
+        btnReset.style.visibility = "visible";
+        victory.style.display = "none";
+        loss.style.display = "none";
+        userChoice.style.display = "none";
+        field.innerHTML = '';
+        bombs = generateBombs(howManyCells);
+        createField(howManyCells);
+        var halabomba = [];
+        return safeCells = howManyCells - +bombs.length;
+    }
 }
 ); 
 // Individuo il bottone per cancellare il campo
@@ -98,6 +109,8 @@ var btnReset = document.getElementById("reset");
 // assegno la funzione al bottone
 btnReset.addEventListener('click',
 function() {
+    btnReset.style.display = "none";
+    error.style.display = "none";
     result.style.display = "none";
     document.getElementById("grid").value = '';
     field.innerHTML = '';
@@ -113,6 +126,8 @@ var btnAgain = document.getElementById('playAgain');
 // assegno la funzione al bottone
 btnAgain.addEventListener('click',
     function() {
+        btnReset.style.display = "none";
+        error.style.display = "none";
         bombs = [];
         field.innerHTML = "";
         result.style.display = "none";
@@ -135,7 +150,15 @@ document.getElementById('campo').addEventListener("click",
         } else if ( !(bombs.includes(bombCheck) ) && (alreadyClicked.includes(bombCheck) ) ){
 
         } else {
-            square.target.classList.add('bomb');
+            square.target.classList.add('bomb','exploded');
+            var fieldChildren = field.children;
+            for (var i = 0; i < fieldChildren.length; i++) {
+                var childId = parseInt(fieldChildren[i].id);
+                if ( bombs.includes(childId) ) {
+                    fieldChildren[i].classList.add('bomb');
+                }
+            }
+            btnReset.style.visibility = "hidden";
             victory.style.display = "none";
             loss.style.display = "block";
             btnAgain.style.display = "inline-block";
@@ -147,8 +170,16 @@ document.getElementById('campo').addEventListener("click",
             field.style.pointerEvents = "none";
     }
     if ( points == safeCells) {
+        var fieldChildren = field.children;
+        for (var i = 0; i < fieldChildren.length; i++) {
+            var childId = parseInt(fieldChildren[i].id);
+            if ( bombs.includes(childId) ) {
+                fieldChildren[i].classList.add('bomb');
+            }
+        }
         field.style.pointerEvents = "none";
         victory.style.display = "block";
+        btnReset.style.visibility = "hidden";
         btnAgain.style.display = "inline-block";
         scoreboard.innerHTML = points + (" Punti");
         result.style.display = "block";

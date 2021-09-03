@@ -58,15 +58,23 @@ button:active {
 }
 
 #reset {
-    display: block;
+    display: none;
     margin: 0 auto;
     background-color: rgb(0, 0, 0);
     color: white;
     margin-bottom: 20px;
 }
 
+#playAgain {
+    font-size: 20px;
+}
+
+#error {
+    color: red;
+    margin: 10px 0;
+}
+
 #result {
-    background-color: blue;
     color: white;
     position: absolute;
     top: 50%;
@@ -76,6 +84,14 @@ button:active {
     text-align: center;
     display: none;
     padding: 5px;
+}
+
+#result h2 {
+    font-size: 40px;
+}
+
+#result h3 {
+    font-size: 30px;
 }
 
 #reset:hover {
@@ -116,10 +132,17 @@ button:active {
 }
 
 .quadrato.bomb {
-    background: rgb(160,0,0);                                                             
     background-image: url(../img/mine.png);
     background-size: contain;
-    background-position: center;
+    background-position:  center;
+    background-blend-mode: multiply;
+}
+
+.quadrato.bomb.exploded {
+    background: red;
+    background-image: url(../img/mine.png);
+    background-size: contain;
+    background-position:  center;
     background-blend-mode: multiply;
 }
 
