@@ -83,6 +83,8 @@ var safeCells = 0;
 // assegno la funzione al bottone
 btnGenerate.addEventListener('click',
 function() {
+    victory.style.display = "none";
+    loss.style.display = "none";
     userChoice.style.display = "none";
     field.innerHTML = '';
     howManyCells = parseInt(document.getElementById('grid').value); 
