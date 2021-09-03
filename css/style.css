@@ -5,6 +5,8 @@
     box-sizing: border-box;
 }
 
+/* Common */
+
 body {
     background-color: #ff9f1c;
     font-family: 'Roboto', sans-serif;  
@@ -13,10 +15,13 @@ body {
 }
 
 h1 {
+    color: #fdfffc;
     font-size: 50px;
     text-align: center;
     margin: 20px 0;
 }
+
+/* Select*/
 
 .user-choice {
     display: block;
@@ -34,6 +39,16 @@ select:hover {
     cursor: pointer;
 }
 
+#error {
+    background-color: #fdfffc;
+    max-width: 350px;
+    color: #F71735;
+    margin: 10px auto;
+    padding: 10px;
+}
+
+/* Bottoni */
+
 button {
     background-color: #011627;
     color: white;
@@ -48,17 +63,14 @@ button {
 
 button:hover {
     cursor: pointer;
-    background-color: rgb(144, 112, 218);
+    opacity: .8;
 }
 
 button:active {
-    background-color: rgb(119, 73, 226);
+    background-color: #04724D;
 
 }
 
-.frame {
-    position: relative;
-}
 
 #reset {
     display: none;
@@ -74,13 +86,17 @@ button:active {
     font-size: 20px;
 }
 
-#error {
-    background-color: #fdfffc;
-    max-width: 350px;
-    color: #F71735;
-    margin: 10px auto;
-    padding: 10px;
+#reset:hover {
+    background-color: #FDFFFC;
+    color: #011627;
+
 }
+
+#reset:active {
+    background-color: darkgray;
+}
+
+/* Risultato */ 
 
 #result {
     color: #011627;
@@ -105,12 +121,10 @@ button:active {
     font-size: 25px;
 }
 
-#reset:hover {
-    background-color: rgb(12, 12, 107);
-}
 
-#reset:active {
-    background-color: darkgray;
+/* Campo minato */
+.frame {
+    position: relative;
 }
 
 #campo {
@@ -119,8 +133,6 @@ button:active {
     margin: auto;
     margin-bottom: 20px;
 }
-
-/* Field width*/
 
 
 .field-500 {
@@ -139,7 +151,7 @@ button:active {
 }
 
 .quadrato:hover {
-    opacity: .5;
+    opacity: .7;
 }
 
 .quadrato.bomb {
