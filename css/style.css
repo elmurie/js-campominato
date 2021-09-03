@@ -123,6 +123,7 @@ button:active {
 
 
 /* Campo minato */
+
 .frame {
     position: relative;
 }
@@ -175,3 +176,27 @@ button:active {
     color: white;
 }
 
+@media screen and (max-width: 530px){
+    .quadrato {
+        width: 30px;
+        height: 30px;
+    }
+    .field-500 {
+        width: 300px;
+    }
+    
+}
+
+@media screen and (max-width: 300px){
+    .quadrato {
+        width: 25px;
+        height: 25px;
+    }
+    .field-500 {
+        width: 250px;
+    }
+    #generate {
+        margin: 20px 0;
+    }
+    
+}
