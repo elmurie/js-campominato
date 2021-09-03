@@ -75,6 +75,7 @@ button:active {
     z-index: 3;
     text-align: center;
     display: none;
+    padding: 5px;
 }
 
 #reset:hover {
@@ -115,9 +116,11 @@ button:active {
 }
 
 .quadrato.bomb {
-    background: red;
+    background: rgb(160,0,0);                                                             
+    background-image: url(../img/mine.png);
+    background-size: contain;
+    background-position: center;
     background-blend-mode: multiply;
-    color: white;
 }
 
 .quadrato.safe {
